@@ -7,7 +7,6 @@ defmodule CongressNinja.Router do
 
   scope "/api", CongressNinja do
     pipe_through :api
-
-    resources "/representatives", RepresentativeController, only: [:show]
+    resources "/rep_requests", RepRequestController, only: [:create]
   end
 end
