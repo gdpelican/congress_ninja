@@ -7,4 +7,11 @@ defmodule CongressNinja.RepRequest do
 
     timestamps
   end
+
+  def changeset(rep_request, params) do
+    rep_request
+    |> cast(params, [:slug])
+    |> validate_required([:slug])
+    |> unique_constraint(:slug)
+  end
 end

@@ -7,10 +7,8 @@ defmodule CongressNinja.RepRequestController do
   alias CongressNinja.Repo
 
   def create(conn, params) do
-    rep_request = %RepRequest{
-      reps: fetch_reps(String.to_integer(params["zip"])),
-      slug: generate_slug
-    }
+    zip = String.to_integer(params["zip"])
+    rep_request = %RepRequest{reps: fetch_reps_by(zip), slug: generate_slug }
 
     case Repo.insert(rep_request) do
       {:ok, rep_request} ->
@@ -20,7 +18,18 @@ defmodule CongressNinja.RepRequestController do
     end
   end
 
-  def fetch_reps(zip) do
+  def update(conn, %{ "id" => id, "rep_request" => rep_request_params }) do
+    rep_request = Repo.get(RepRequest, id)
+    changeset = RepRequest.changeset(rep_request, rep_request_params)
+    case Repo.update(changeset) do
+      {:ok, rep_request} ->
+        render conn, "show.json", rep_request: rep_request |> Repo.preload(:reps)
+      {:error, changeset} ->
+        render conn, "error.json", errors: changeset.errors
+    end
+  end
+
+  def fetch_reps_by(zip) do
     Repo.all from r in Rep,
       join:     zd in ZipDistrict, where: zd.state == r.state and zd.district == r.district,
       where:    zd.zip == ^zip,

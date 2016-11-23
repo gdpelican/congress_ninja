@@ -15,7 +15,7 @@ defmodule CongressNinja.RepRequestView do
     }
   end
 
-  def render("error.json", %{errors: errors}) do
-    %{ errors: "oops!" }
+  def render("error.json", errors) do
+    errors
   end
 end

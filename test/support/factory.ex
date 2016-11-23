@@ -23,4 +23,11 @@ defmodule CongressNinja.Factory do
       updated_at: Ecto.DateTime.utc
     }
   end
+
+  def rep_request_factory do
+    %CongressNinja.RepRequest{
+      reps: [insert(:rep)],
+      slug: "a_slug"
+    }
+  end
 end
