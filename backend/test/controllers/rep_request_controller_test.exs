@@ -23,4 +23,26 @@ defmodule CongressNinja.RepRequestControllerTest do
     json = json_response(conn, 200)
     assert json["rep_request"]["slug"] == "new_stub"
   end
+
+  test "#show gets a previously existing rep request by stub" do
+    rep = insert(:rep)
+    insert(:rep_request, %{ reps: [rep], slug: "a_slug" })
+    conn = build_conn()
+
+    conn = get conn, rep_request_path(conn, :show, "a_slug")
+
+    json = json_response(conn, 200)
+    assert length(json["rep_request"]["reps"]) == 1
+    [r] = json["rep_request"]["reps"]
+    assert r["name"] == rep.name
+  end
+
+  test "#show returns 404 when an existing rep request does not exist" do
+    insert(:rep_request, %{ reps: [insert(:rep)], slug: "a_slug" })
+    conn = build_conn()
+
+    conn = get conn, rep_request_path(conn, :show, "another_slug")
+
+    json_response(conn, 404)
+  end
 end

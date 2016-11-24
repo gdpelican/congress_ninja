@@ -13,7 +13,7 @@ config :congress_ninja,
 config :congress_ninja, CongressNinja.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "+tK2p9Gy7BIjMycE5egMgTJcY7rxMIjJA832FMU/LO6uUuNmFVdIz1FC1MLV5VB/",
-  render_errors: [view: CongressNinja.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: CongressNinja.ErrorView, accepts: ~w(json)],
   pubsub: [name: CongressNinja.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
