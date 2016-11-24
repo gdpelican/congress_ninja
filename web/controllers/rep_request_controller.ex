@@ -1,9 +1,7 @@
 require IEx
 defmodule CongressNinja.RepRequestController do
   use CongressNinja.Web, :controller
-  alias CongressNinja.Rep
   alias CongressNinja.RepRequest
-  alias CongressNinja.ZipDistrict
   alias CongressNinja.Repo
 
   def create(conn, %{ "rep_request" => rep_request_params }) do
