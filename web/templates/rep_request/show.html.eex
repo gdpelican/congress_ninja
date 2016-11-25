@@ -1,1 +1,13 @@
-<%= render CongressNinja.SharedView, "_vueapp.html", rep_request: @rep_request %>
+<section>
+  <ul>
+    <%= for rep <- @rep_request.reps do %>
+      <%= render CongressNinja.RepRequestView, "_rep.html", rep: rep %>
+    <% end %>
+  </ul>
+  <%= if Enum.count(@rep_request.reps) == 0 do %>
+    <div>No rep!</div>
+  <% end %>
+  <%= if Enum.count(@rep_request.reps) > 1 do %>
+    <div>Multiple reps!</div>
+  <% end %>
+</section>

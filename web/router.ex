@@ -1,12 +1,8 @@
 defmodule CongressNinja.Router do
   use CongressNinja.Web, :router
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
-  pipeline :static do
-    plug :accepts, ["html"]
+  pipeline :default do
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -14,13 +10,9 @@ defmodule CongressNinja.Router do
   end
 
   scope "/", CongressNinja do
-    pipe_through :static
-    get "/", RootController, :index
+    pipe_through :default
+    get "/",    RootController, :index
     get "/:id", RepRequestController, :show
-  end
-
-  scope "/api", CongressNinja do
-    pipe_through :api
-    resources "/rep_requests", RepRequestController, only: [:show, :create, :update]
+    resources "/rep_requests", RepRequestController, only: [:create, :update]
   end
 end

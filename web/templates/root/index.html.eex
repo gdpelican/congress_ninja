@@ -1,0 +1,5 @@
+<form action="/rep_requests" method="POST">
+  <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>" />
+  <input name="rep_request[zip]" type="number" placeholder="What's your zip code?" />
+  <input type="submit" />
+</form>

@@ -7,9 +7,9 @@ defmodule CongressNinja.RepRequestController do
   def show(conn, %{ "id" => slug }) do
     case Repo.get_by(RepRequest, %{ slug: slug }) do
       rep_request -> if rep_request do
-        render conn, "show.json", rep_request: rep_request
+        render conn, :show, rep_request: rep_request |> Repo.preload(:reps)
       else
-        put_status(conn, 404) |> render(ErrorView, "404.json", %{ message: "#{slug} not found" })
+        redirect conn, to: "/"
       end
     end
   end
@@ -17,18 +17,18 @@ defmodule CongressNinja.RepRequestController do
   def create(conn, %{ "rep_request" => rep_request_params }) do
     case Repo.insert(RepRequest.createset(rep_request_params)) do
       {:ok, rep_request} ->
-        render conn, "show.json", rep_request: rep_request
+        redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->
-        render conn, "error.json", errors: changeset.errors
+        render conn, :error, errors: changeset.errors
     end
   end
 
   def update(conn, %{ "id" => id, "rep_request" => rep_request_params }) do
     case Repo.update(RepRequest.changeset(Repo.get(RepRequest, id), rep_request_params)) do
       {:ok, rep_request} ->
-        render conn, "show.json", rep_request: rep_request
+        redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->
-        render conn, "error.json", errors: changeset.errors
+        render conn, :error, errors: changeset.errors
     end
   end
 end

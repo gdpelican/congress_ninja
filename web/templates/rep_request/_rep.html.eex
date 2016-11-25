@@ -1,0 +1,3 @@
+<li class="rep">
+  <%= @rep.name %>
+</li>
