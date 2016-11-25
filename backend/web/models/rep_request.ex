@@ -15,20 +15,30 @@ defmodule CongressNinja.RepRequest do
 
   def createset(%{ "zip" => zip }) do
     changeset(%RepRequest{}, %{
-      reps: Rep.fetch_reps_by_zip(zip),
-      slug: SlugService.generate
+      "reps" => Rep.fetch_reps_by_zip(zip),
+      "slug" => SlugService.generate
     })
   end
 
   def changeset(rep_request, %{ "address" => address }) do
-    changeset(rep_request |> Repo.preload(:reps), %{})
-    |> put_assoc(:reps, [GeocodioService.fetch_rep_by_address(address)])
+    changeset(rep_request, %{
+      "reps" => [GeocodioService.fetch_rep_by_address(address)],
+      "slug" => rep_request.slug
+    })
+  end
+
+  def changeset(rep_request, %{ "reps" => reps, "slug" => slug }) do
+    rep_request
+    |> Repo.preload(:reps)
+    |> changeset(%{"slug" => slug})
+    |> Ecto.Changeset.put_assoc(:reps, reps)
+    |> validate_required([:reps])
   end
 
   def changeset(rep_request, params) do
     rep_request
     |> cast(params, [:slug])
-    |> validate_required([:slug, :reps])
+    |> validate_required([:slug])
     |> unique_constraint(:slug)
   end
 end

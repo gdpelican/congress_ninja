@@ -1,5 +1,6 @@
 defmodule CongressNinja.RepRequestView do
   use CongressNinja.Web, :view
+  alias CongressNinja.Repo
 
   def render("show.html", assigns) do
     render CongressNinja.RootView, "show.html", assigns
@@ -9,7 +10,7 @@ defmodule CongressNinja.RepRequestView do
     %{
       rep_request: %{
         id:   rep_request.id,
-        reps: Enum.map(rep_request.reps, fn(rep) ->
+        reps: Enum.map(Repo.all(Ecto.assoc(rep_request, :reps)), fn(rep) ->
           %{
             "name" => rep.name
           }
