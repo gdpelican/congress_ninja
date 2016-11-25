@@ -4,8 +4,8 @@ defmodule CongressNinja.RepRequestControllerTest do
 
   test "#create successfully creates a rep request" do
     conn         = build_conn()
-    rep          = insert(:rep, %{ district: 1, state: "AZ" })
-    insert(:zip_district, %{ district: 1, state: "AZ", zip: 19122 })
+    rep          = insert(:rep)
+    insert(:zip_district, %{ zip: 19122, rep_id: rep.id })
 
     conn = post conn, rep_request_path(conn, :create), rep_request: %{ zip: 19122 }
 
