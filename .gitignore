@@ -1,10 +1,10 @@
 # App artifacts
-/backend/_build
-/backend/db
-/backend/deps
+/_build
+/db
+/deps
 /*.ez
-/backend/erl_crash.dump
-/backend/node_modules
-/backend/priv/static/
-/backend/config/prod.secret.exs
+/erl_crash.dump
+/node_modules
+/priv/static/
+/config/prod.secret.exs
 .DS_STORE
