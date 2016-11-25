@@ -1,6 +1,6 @@
 defmodule CongressNinja.SlugService do
 
   def generate do
-    "'random'"
+    "random"
   end
 end

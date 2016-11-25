@@ -1,0 +1,10 @@
+<div id="app">
+  <section v-if="repRequest.id">
+    RepRequest: {{repRequest.id}}
+  </section>
+  <form v-else v-on:submit="submit">
+    <label for="rep-request-zip">What's your zip code?</label>
+    <input id="rep-request-zip" type="number" v-model.trim="repRequest.zip" />
+    <input type="submit" />
+  </form>
+</div>

@@ -1,6 +1,10 @@
 defmodule CongressNinja.RepRequestView do
   use CongressNinja.Web, :view
 
+  def render("show.html", assigns) do
+    render CongressNinja.RootView, "show.html", assigns
+  end
+
   def render("show.json", %{rep_request: rep_request}) do
     %{
       rep_request: %{

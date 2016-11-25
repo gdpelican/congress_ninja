@@ -23,7 +23,7 @@ defmodule CongressNinja.Rep do
 
   def fetch_reps_by_zip(zip) do
     Repo.all from r in Rep,
-      join:     zd in ZipDistrict, where: zd.state == r.state and zd.district == r.district,
+      join:     zd in ZipDistrict, where: r.id == zd.rep_id,
       where:    zd.zip == ^zip,
       order_by: [:name]
   end

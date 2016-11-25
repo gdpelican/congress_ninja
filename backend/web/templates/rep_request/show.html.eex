@@ -1,0 +1,1 @@
+<%= render CongressNinja.SharedView, "_vueapp.html", rep_request: @rep_request %>

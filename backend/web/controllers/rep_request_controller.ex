@@ -1,4 +1,3 @@
-require IEx
 defmodule CongressNinja.RepRequestController do
   use CongressNinja.Web, :controller
   alias CongressNinja.RepRequest
