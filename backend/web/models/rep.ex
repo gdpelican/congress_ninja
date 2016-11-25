@@ -21,7 +21,7 @@ defmodule CongressNinja.Rep do
     timestamps
   end
 
-  def fetch_reps_by(zip) do
+  def fetch_reps_by_zip(zip) do
     Repo.all from r in Rep,
       join:     zd in ZipDistrict, where: zd.state == r.state and zd.district == r.district,
       where:    zd.zip == ^zip,
