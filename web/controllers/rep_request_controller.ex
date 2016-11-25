@@ -24,7 +24,7 @@ defmodule CongressNinja.RepRequestController do
         redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->
         conn
-        |> put_flash(:error, "We couldn't find that zip code! Try again?")
+        |> put_flash(:info, "We couldn't find that zip code! Try again?")
         |> render(:index, errors: changeset.errors)
     end
   end
@@ -35,7 +35,7 @@ defmodule CongressNinja.RepRequestController do
         redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->
         conn
-        |> put_flash(:error, IO.inspect(changeset.errors))
+        |> put_flash(:info, changeset.errors)
         |> render(:index, errors: changeset.errors)
       end
   end

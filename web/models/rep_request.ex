@@ -33,7 +33,6 @@ defmodule CongressNinja.RepRequest do
     |> changeset(%{"slug" => slug})
     |> Ecto.Changeset.put_assoc(:reps, reps)
     |> validate_rep_association(reps)
-    |> validate_required([:reps])
   end
 
   def changeset(rep_request, params) do

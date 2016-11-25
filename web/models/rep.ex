@@ -21,10 +21,14 @@ defmodule CongressNinja.Rep do
     timestamps
   end
 
-  def fetch_reps_by_zip(zip) do
+  def fetch_reps_by_zip(zip) when is_integer(zip) do
     Repo.all from r in Rep,
       join:     zd in ZipDistrict, where: r.id == zd.rep_id,
       where:    zd.zip == ^zip,
       order_by: [:name]
+  end
+
+  def fetch_reps_by_zip(zip) do
+    []
   end
 end
