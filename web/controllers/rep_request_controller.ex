@@ -4,6 +4,10 @@ defmodule CongressNinja.RepRequestController do
   alias CongressNinja.ErrorView
   alias CongressNinja.Repo
 
+  def index(conn, _params) do
+    render conn, "index.html"
+  end
+
   def show(conn, %{ "id" => slug }) do
     case Repo.get_by(RepRequest, %{ slug: slug }) do
       rep_request -> if rep_request do
@@ -19,7 +23,9 @@ defmodule CongressNinja.RepRequestController do
       {:ok, rep_request} ->
         redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->
-        render conn, :error, errors: changeset.errors
+        conn
+        |> put_flash(:error, "We couldn't find that zip code! Try again?")
+        |> render(:index, errors: changeset.errors)
     end
   end
 
@@ -28,7 +34,9 @@ defmodule CongressNinja.RepRequestController do
       {:ok, rep_request} ->
         redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->
-        render conn, :error, errors: changeset.errors
-    end
+        conn
+        |> put_flash(:error, IO.inspect(changeset.errors))
+        |> render(:index, errors: changeset.errors)
+      end
   end
 end

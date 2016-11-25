@@ -32,6 +32,7 @@ defmodule CongressNinja.RepRequest do
     |> Repo.preload(:reps)
     |> changeset(%{"slug" => slug})
     |> Ecto.Changeset.put_assoc(:reps, reps)
+    |> validate_rep_association(reps)
     |> validate_required([:reps])
   end
 
@@ -40,5 +41,14 @@ defmodule CongressNinja.RepRequest do
     |> cast(params, [:slug])
     |> validate_required([:slug])
     |> unique_constraint(:slug)
+  end
+
+  def validate_rep_association(changeset, reps) do
+    cond do
+      length(reps) == 0 ->
+        add_error changeset, :reps, "At least one rep is needed"
+      true ->
+        changeset
+    end
   end
 end

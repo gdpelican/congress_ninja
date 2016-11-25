@@ -11,7 +11,7 @@ defmodule CongressNinja.Router do
 
   scope "/", CongressNinja do
     pipe_through :default
-    get "/",    RootController, :index
+    get "/",    RepRequestController, :index
     get "/:id", RepRequestController, :show
     resources "/rep_requests", RepRequestController, only: [:create, :update]
   end
