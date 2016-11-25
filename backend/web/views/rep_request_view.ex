@@ -1,5 +1,6 @@
 defmodule CongressNinja.RepRequestView do
   use CongressNinja.Web, :view
+  alias CongressNinja.Rep
   alias CongressNinja.Repo
 
   def render("show.html", assigns) do
@@ -12,7 +13,16 @@ defmodule CongressNinja.RepRequestView do
         id:   rep_request.id,
         reps: Enum.map(Repo.all(Ecto.assoc(rep_request, :reps)), fn(rep) ->
           %{
-            "name" => rep.name
+            "id"       => rep.id,
+            "state"    => rep.state,
+            "district" => rep.district,
+            "website"  => rep.website,
+            "phone"    => rep.phone,
+            "name"     => rep.name,
+            "avatar"   => rep.avatar,
+            "party"    => rep.party,
+            "email"    => rep.email,
+            "twitter"  => rep.twitter
           }
         end),
         slug: rep_request.slug
