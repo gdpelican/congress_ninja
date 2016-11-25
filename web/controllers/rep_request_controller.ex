@@ -15,7 +15,7 @@ defmodule CongressNinja.RepRequestController do
   end
 
   def create(conn, %{ "rep_request" => rep_request_params }) do
-    case Repo.insert(RepRequest.createset(rep_request_params)) do
+    case Repo.insert(RepRequest.changeset(%RepRequest{}, rep_request_params)) do
       {:ok, rep_request} ->
         redirect conn, to: "/#{rep_request.slug}"
       {:error, changeset} ->

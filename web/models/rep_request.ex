@@ -13,8 +13,8 @@ defmodule CongressNinja.RepRequest do
     timestamps
   end
 
-  def createset(%{ "zip" => zip }) do
-    changeset(%RepRequest{}, %{
+  def changeset(rep_request, %{ "zip" => zip }) do
+    changeset(rep_request, %{
       "reps" => Rep.fetch_reps_by_zip(zip),
       "slug" => SlugService.generate
     })
