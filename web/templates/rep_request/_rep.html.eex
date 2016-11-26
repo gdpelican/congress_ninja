@@ -1,3 +1,8 @@
 <li class="rep">
-  <%= @rep.name %>
+  <section>
+    <img src="<%= @rep.avatar %>" alt="<%= @rep.name %>" />
+    <h2><%= @rep.name %></h2>
+    <h3><%= @rep.state_name %> - District <%= @rep.district %></h3>
+    <a href="tel:+1-<%= @rep.phone %>" /><%= @rep.phone %></a>
+  </section>
 </li>
