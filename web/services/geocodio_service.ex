@@ -1,24 +1,29 @@
 defmodule CongressNinja.GeocodioService do
-  alias CongressNinja.Repo
-  alias CongressNinja.Rep
+  alias CongressNinja.GeocodioService
 
-  def fetch_rep_by_address(address) do
-    case HTTPotion.get "https://api.geocod.io/v1/geocode?q=#{URI.encode(address)}&fields=cd&api_key=#{api_key}" do
-      {:ok, body} ->
-        body |> Poison.decode! |> locate_rep
-      _error_response ->
-        []
+  def fetch_state_and_district_by(address) do
+    response = address |> url |> HTTPotion.get
+    case response.status_code do
+      200 ->
+        response.body |> Poison.decode! |> extract
+      _ ->
+        nil
     end
   end
 
-  defp locate_rep(json) do
-    Repo.get_by(Rep, %{
-      state:    get_in(json, ["results", "address_components", "state"]),
-      district: get_in(json, ["results", "fields", "congressional_district", "district_number"])
-    })
+  defp url(address) do
+    "https://api.geocod.io/v1/geocode?q=#{URI.encode(address)}&fields=cd&api_key=#{api_key}"
+  end
+
+  defp extract(json) do
+    results  = json["results"] |> List.first
+    {
+      get_in(results, ["address_components", "state"]),
+      get_in(results, ["fields", "congressional_district", "district_number"])
+    }
   end
 
   defp api_key do
-    Application.get_env(:congress_ninja, GeocodioService)["geocodio_api_key"]
+    Application.get_env(:congress_ninja, GeocodioService)[:geocodio_api_key]
   end
 end

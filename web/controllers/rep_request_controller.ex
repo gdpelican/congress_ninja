@@ -1,7 +1,6 @@
 defmodule CongressNinja.RepRequestController do
   use CongressNinja.Web, :controller
   alias CongressNinja.RepRequest
-  alias CongressNinja.ErrorView
   alias CongressNinja.Repo
 
   def index(conn, _params) do
@@ -10,11 +9,10 @@ defmodule CongressNinja.RepRequestController do
 
   def show(conn, %{ "id" => slug }) do
     case Repo.get_by(RepRequest, %{ slug: slug }) do
-      rep_request -> if rep_request do
-        render conn, :show, rep_request: rep_request |> Repo.preload(:reps)
-      else
+      nil ->
         redirect conn, to: "/"
-      end
+      rep_request ->
+        render conn, :show, rep_request: rep_request |> Repo.preload(:reps)
     end
   end
 

@@ -2,8 +2,6 @@ defmodule CongressNinja.RepRequest do
   use CongressNinja.Web, :model
   alias CongressNinja.Rep
   alias CongressNinja.Repo
-  alias CongressNinja.RepRequest
-  alias CongressNinja.GeocodioService
   alias CongressNinja.SlugService
 
   schema "rep_requests" do
@@ -13,17 +11,17 @@ defmodule CongressNinja.RepRequest do
     timestamps
   end
 
-  def changeset(rep_request, %{ "zip" => zip }) do
+  def changeset(rep_request, %{ "address" => address }) do
     changeset(rep_request, %{
-      "reps" => Rep.fetch_reps_by_zip(zip),
-      "slug" => SlugService.generate
+      "reps" => Rep.fetch_reps_by_address([], address),
+      "slug" => rep_request.slug
     })
   end
 
-  def changeset(rep_request, %{ "address" => address }) do
+  def changeset(rep_request, %{ "zip" => zip }) do
     changeset(rep_request, %{
-      "reps" => [GeocodioService.fetch_rep_by_address(address)],
-      "slug" => rep_request.slug
+      "reps" => Rep.fetch_reps_by_zip(Integer.parse(zip)),
+      "slug" => SlugService.generate
     })
   end
 
