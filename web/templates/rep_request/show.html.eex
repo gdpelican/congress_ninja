@@ -10,4 +10,5 @@
   <%= if Enum.count(@rep_request.reps) > 1 do %>
     <div>Multiple reps!</div>
   <% end %>
+  <a href="/clear" alt="clear existing search">Search for another zip code</a>
 </section>

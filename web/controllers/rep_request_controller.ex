@@ -4,13 +4,20 @@ defmodule CongressNinja.RepRequestController do
   alias CongressNinja.Repo
 
   def index(conn, _params) do
-    render conn, "index.html"
+    case conn.cookies["cn-slug"] do
+      nil ->
+        render conn, "index.html"
+      slug ->
+        redirect conn, to: "/#{slug}"
+    end
   end
 
   def show(conn, %{ "id" => slug }) do
     case Repo.get_by(RepRequest, %{ slug: slug }) do
       nil ->
-        redirect conn, to: "/"
+        conn
+        |> set_slug_cookie("") # clear the existing cookie if we miss the slug
+        |> redirect(to: "/")
       rep_request ->
         render conn, :show, rep_request: rep_request |> Repo.preload(:reps)
     end
@@ -19,7 +26,9 @@ defmodule CongressNinja.RepRequestController do
   def create(conn, %{ "rep_request" => rep_request_params }) do
     case Repo.insert(RepRequest.changeset(%RepRequest{}, rep_request_params)) do
       {:ok, rep_request} ->
-        redirect conn, to: "/#{rep_request.slug}"
+        conn
+        |> set_slug_cookie(rep_request.slug, 31536000) # one year expiration
+        |> redirect to: "/#{rep_request.slug}"
       {:error, changeset} ->
         conn
         |> put_flash(:info, "We couldn't find that zip code! Try again?")
@@ -35,6 +44,18 @@ defmodule CongressNinja.RepRequestController do
         conn
         |> put_flash(:info, changeset.errors)
         |> render(:index, errors: changeset.errors)
-      end
+    end
+  end
+
+  def clear(conn, _params) do
+    conn
+    |> set_slug_cookie("")
+    |> redirect(to: "/")
+  end
+
+  # set the cookie to remember the last search by the user
+  # this clears by default; age must be specified to save the cookie.
+  defp set_slug_cookie(conn, slug, age \\ 0) do
+    Plug.Conn.put_resp_cookie(conn, "cn-slug", slug, max_age: age)
   end
 end
