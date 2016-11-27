@@ -1,14 +1,39 @@
 <section>
+  <%= case Enum.count(@rep_request.reps) do %>
+  <% 1 -> %>
+    Your representative is:
+  <% _ -> %>
+    <div>
+      <span>Looks like there is more than one possible rep for your zip code. </span>
+      <a href="http://sunlightfoundation.com/2012/01/19/dont-use-zipcodes/", target="_blank">Why is that?</a>
+    </div>
+  <% end %>
+
   <ul>
     <%= for rep <- @rep_request.reps do %>
       <%= render CongressNinja.RepRequestView, "_rep.html", rep: rep %>
     <% end %>
   </ul>
-  <%= if Enum.count(@rep_request.reps) == 0 do %>
-    <div>No rep!</div>
+
+  <%= case Enum.count(@rep_request.reps) do %>
+    <% 0 -> %>
+      <div>
+        <span>Sorry, we couldn't find that zip code in our database. You can <span>
+        <a href="/">Try again</a>
+        <span> or, if you really can't get it to work, check out </span>
+        <a href="https://house.gov/representatives/find/">the official registry</a>.
+      </div>
+    <% _ -> %>
+      <%= if Enum.count(@rep_request.reps) > 1 do %>
+        <%= render CongressNinja.RepRequestView, "_address.html", changeset: @changeset, conn: @conn, rep_request: @rep_request %>
+      <% end %>
+
+      <p>
+        <div>You can get back here on any device by visiting</div>
+        <div><%= rep_request_url(CongressNinja.Endpoint, :show, @rep_request.slug) %>.</div>
+        <div>Plus, we've remembered your search on this device!</span>
+      </p>
   <% end %>
-  <%= if Enum.count(@rep_request.reps) > 1 do %>
-    <%= render CongressNinja.RepRequestView, "_address.html", changeset: @changeset, conn: @conn, rep_request: @rep_request %>
-  <% end %>
-  <a href="/clear" alt="clear existing search">Search for another zip code</a>
+
+    <a href="/clear" alt="clear existing search">Enter another zip code</a>
 </section>
