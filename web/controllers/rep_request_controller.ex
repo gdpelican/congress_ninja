@@ -13,13 +13,15 @@ defmodule CongressNinja.RepRequestController do
   end
 
   def show(conn, %{ "id" => slug }) do
-    case Repo.get_by(RepRequest, %{ slug: slug }) do
+    case RepRequest.find_by_slug(slug) do
       nil ->
         conn
         |> set_slug_cookie("") # clear the existing cookie if we miss the slug
+        |> put_flash(:info, "We couldn't find that page! Try putting in your zip code again?")
         |> redirect(to: "/")
       rep_request ->
-        render conn, :show, rep_request: rep_request |> Repo.preload(:reps)
+        conn
+        |> render :show, changeset: RepRequest.changeset(rep_request, %{}), rep_request: rep_request |> Repo.preload(:reps)
     end
   end
 
@@ -39,7 +41,8 @@ defmodule CongressNinja.RepRequestController do
   def update(conn, %{ "id" => id, "rep_request" => rep_request_params }) do
     case Repo.update(RepRequest.changeset(Repo.get(RepRequest, id), rep_request_params)) do
       {:ok, rep_request} ->
-        redirect conn, to: "/#{rep_request.slug}"
+        conn
+        |> redirect to: "/#{rep_request.slug}"
       {:error, changeset} ->
         conn
         |> put_flash(:info, changeset.errors)

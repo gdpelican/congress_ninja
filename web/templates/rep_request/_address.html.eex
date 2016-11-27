@@ -1,0 +1,16 @@
+<%= form_for @changeset, rep_request_path(@conn, :update, @rep_request), fn f -> %>
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>" />
+  <input type="hidden" name="rep_request[slug]" value="<%= @rep_request.slug %>" />
+
+  <div>
+    <span>Looks like there is more than one possible rep for your zip code. </span>
+    <a href="http://sunlightfoundation.com/2012/01/19/dont-use-zipcodes/">Why is that?</a>
+  </div>
+
+  <div>
+    <div>To get your exact representative, please enter your address below:</div>
+    <input name="rep_request[address]" />
+    <div>Don't worry, we don't store this information anywhere, much less give it to anyone else.</div>
+  </div>
+<% end %>

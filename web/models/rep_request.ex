@@ -2,6 +2,7 @@ defmodule CongressNinja.RepRequest do
   use CongressNinja.Web, :model
   alias CongressNinja.Rep
   alias CongressNinja.Repo
+  alias CongressNinja.RepRequest
   alias CongressNinja.SlugService
 
   schema "rep_requests" do
@@ -11,10 +12,10 @@ defmodule CongressNinja.RepRequest do
     timestamps
   end
 
-  def changeset(rep_request, %{ "address" => address }) do
+  def changeset(rep_request, %{ "slug" => slug, "address" => address }) do
     changeset(rep_request, %{
       "reps" => Rep.fetch_reps_by_address([], address),
-      "slug" => rep_request.slug
+      "slug" => slug
     })
   end
 
@@ -29,7 +30,7 @@ defmodule CongressNinja.RepRequest do
     rep_request
     |> Repo.preload(:reps)
     |> changeset(%{"slug" => slug})
-    |> Ecto.Changeset.put_assoc(:reps, reps)
+    |> put_assoc(:reps, reps)
     |> validate_rep_association(reps)
   end
 
@@ -47,5 +48,9 @@ defmodule CongressNinja.RepRequest do
       true ->
         changeset
     end
+  end
+
+  def find_by_slug(slug) do
+    Repo.get_by(RepRequest, %{ slug: slug })
   end
 end
