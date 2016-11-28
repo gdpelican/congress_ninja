@@ -1,0 +1,5 @@
+<div>
+  <div class="reminder">You can get back here on any device by visiting</div>
+  <div class="slug-url highlight-area"><%= rep_request_url(CongressNinja.Endpoint, :show, @rep_request.slug) %></div>
+  <div>Plus, we've remembered your search on this device!</div>
+</div>

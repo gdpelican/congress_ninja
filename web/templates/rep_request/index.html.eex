@@ -1,7 +1,7 @@
 <h1>Who's representing you?</h1>
 <h2>Contact them in an instant</h2>
-<form action="/rep_requests" method="POST">
+<form class="highlight-area" action="/rep_requests" method="POST">
   <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>" />
   <input class="form-input" name="rep_request[zip]" type="number" placeholder="What's your zip code?" />
-  <input class="form-submit" type="submit" value="GO" />
+  <input class="form-submit button form-button" type="submit" value="GO" />
 </form>

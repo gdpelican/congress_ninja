@@ -49,6 +49,10 @@ a         { color: #bbb; }
 a:visited { color: #ccc; }
 a:hover   { color: #ddd; }
 
+.why-is-that {
+  white-space: nowrap;
+}
+
 .container {
   padding: 10px;
   height: 100vh;
@@ -67,9 +71,68 @@ footer {
 
 .alert { margin: 0; }
 
-.rep {
-  margin: 0 10px;
+.highlight-area {
   display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.reminder {
+  font-size: 20px;
+}
+
+.rep-list {
+  margin-top: 75px;
+}
+
+.rep {
+  margin: 0 10px 50px;
+  text-shadow: 2px 2px 0 black;
+}
+
+/* https://designshack.net/articles/css/css-button-tutorial-how-to-code-buttons-in-5-simple-steps/*/
+.button {
+  background: #34bc6f;
+  border: 2px solid rgba(33, 168, 72, 0.6);
+  color: rgba(0,0,0,0.55);
+  text-align: center;
+  font: "Helvetica Neue";
+  font-weight: bold;
+  text-decoration: none;
+  background: -webkit-linear-gradient(top, #34bc6f, #2f9a63);
+  background: linear-gradient(top, #34bc6f, #2f9a63);
+  box-shadow: 0 8px 0 #1b383b;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  line-height: 65px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 20px;
+  vertical-align:top;
+}
+
+.rep-image {
+  border-radius: 6px;
+}
+
+.rep-button {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+}
+
+.rep-title {
+  margin-bottom: 15px;
+}
+
+/*Step 5: Hover Styles*/
+.button:hover {
+	background: #3da680;
+  background: -webkit-linear-gradient(top, #3da680, #2f5f63);
+	background: linear-gradient(top, #3da680, #2f5f63);
 }
 
 .form-wrapper {
@@ -87,36 +150,33 @@ footer {
   border: 0;
   color: white;
   background: transparent;
-  border-bottom: 3px dashed white;
   margin-right: 15px;
   line-height: 60px;
 }
 
-.form-submit {
-  line-height: 65px;
-  font-size: 30px;
-  color: white;
-  font-weight: bold;
-  text-shadow: 0 0 3px green;
-  cursor: pointer;
-  border: 0;
-  background: lightgreen;
-  border-radius: 6px;
-  padding: 0 20px;
-  vertical-align:top;
-}
-
 .address-disclaimer {
   font-size: 14px;
+  line-height: 20px;
 }
 
 .main-spacer {
-  margin: 25px 0;
+  margin: 75px 15px;
+  border: 1px solid #555;
+}
+
+.clear-search {
+  margin-top: 75px;
 }
 
 .slug-url {
   margin: 5px;
   font-size: 30px;
+  color: white;
+  text-shadow: 2px 2px 8px black;
+}
+
+@media (max-width: 460px) {
+  .slug-url { font-size: 25px; }
 }
 
 input::-webkit-outer-spin-button,

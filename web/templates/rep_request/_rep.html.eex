@@ -1,8 +1,8 @@
-<li class="rep">
+<li class="rep highlight-area">
   <section>
-    <img src="<%= @rep.avatar %>" alt="<%= @rep.name %>" />
-    <h3><%= @rep.name %></h2>
-    <h4><%= @rep.state_name %> - District <%= @rep.district %></h3>
-    <a href="tel:+1-<%= @rep.phone %>" /><%= @rep.phone %></a>
+    <img class="rep-image" src="<%= @rep.avatar %>" alt="<%= @rep.name %>" />
+    <h1 class="rep-name"><%= @rep.name %></h2>
+    <h2 class="rep-title"><%= @rep.state_name %> - District <%= @rep.district %></h3>
+    <a class="button rep-button" href="tel:+1-<%= @rep.phone %>" /><%= @rep.phone %></a>
   </section>
 </li>
