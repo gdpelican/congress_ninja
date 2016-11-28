@@ -1,11 +1,11 @@
-<%= form_for @changeset, rep_request_path(@conn, :update, @rep_request), fn f -> %>
-  <input type="hidden" name="_method" value="put" />
-  <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>" />
-  <input type="hidden" name="rep_request[slug]" value="<%= @rep_request.slug %>" />
-
-  <div>
+<div class="form-wrapper">
+  <%= form_for @changeset, rep_request_path(@conn, :update, @rep_request), fn f -> %>
     <div>To get your exact representative, please enter your address below:</div>
-    <input name="rep_request[address]" />
-    <div>Don't worry, we don't store this information anywhere, much less give it to anyone else.</div>
-  </div>
-<% end %>
+    <div class="form-input-wrapper">
+      <input type="hidden" name="rep_request[slug]" value="<%= @rep_request.slug %>" />
+      <input class="form-input" name="rep_request[address]" placeholder="123 Any St, Springfield" />
+      <input class="form-submit" type="submit" value="GO" />
+    </div>
+    <div class="address-disclaimer">Don't worry, we don't store this information anywhere, much less give it to anyone else.</div>
+  <% end %>
+</div>

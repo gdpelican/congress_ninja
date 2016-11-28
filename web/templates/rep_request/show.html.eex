@@ -1,7 +1,7 @@
 <section>
   <%= case Enum.count(@rep_request.reps) do %>
   <% 1 -> %>
-    Your representative is:
+    <div>Your representative is:</div>
   <% _ -> %>
     <div>
       <span>Looks like there is more than one possible rep for your zip code. </span>
@@ -9,7 +9,7 @@
     </div>
   <% end %>
 
-  <ul>
+  <ul class="main-spacer">
     <%= for rep <- @rep_request.reps do %>
       <%= render CongressNinja.RepRequestView, "_rep.html", rep: rep %>
     <% end %>
@@ -17,7 +17,7 @@
 
   <%= case Enum.count(@rep_request.reps) do %>
     <% 0 -> %>
-      <div>
+      <div class="main-spacer">
         <span>Sorry, we couldn't find that zip code in our database. You can <span>
         <a href="/">Try again</a>
         <span> or, if you really can't get it to work, check out </span>
@@ -28,12 +28,13 @@
         <%= render CongressNinja.RepRequestView, "_address.html", changeset: @changeset, conn: @conn, rep_request: @rep_request %>
       <% end %>
 
-      <p>
+      <div class="main-spacer">
         <div>You can get back here on any device by visiting</div>
-        <div><%= rep_request_url(CongressNinja.Endpoint, :show, @rep_request.slug) %>.</div>
-        <div>Plus, we've remembered your search on this device!</span>
-      </p>
+        <div class="slug-url"><%= rep_request_url(CongressNinja.Endpoint, :show, @rep_request.slug) %></div>
+        <div>Plus, we've remembered your search on this device!</div>
+      </div>
   <% end %>
-
-    <a href="/clear" alt="clear existing search">Enter another zip code</a>
+    <div class="clear-search">
+      <a href="/clear" alt="clear existing search">Enter another zip code</a>
+    </div>
 </section>
