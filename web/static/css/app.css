@@ -22,6 +22,12 @@ body {
   body { background-image: url('/images/houseofreps.jpg'); }
 }
 
+header .alert {
+  background: rgba(0,0,0,0.5);
+  padding: 15px;
+}
+header .alert-info { color: #cc5454; }
+
 ul, li {
   text-align: center;
   padding: 0;

@@ -47,13 +47,17 @@ defmodule CongressNinja.Rep do
 
   defp find_by_state_and_district(response) do
     case response do
+      nil ->
+        []
+      {nil, _district} ->
+        []
+      {_state, nil} ->
+        []
       {state, district} ->
         Repo.all(from r in Rep,
           join:     zd in ZipDistrict, where: r.id == zd.rep_id,
           where:    zd.state == ^state and zd.district == ^district,
           order_by: [:name]) |> List.first
-      _ ->
-        []
     end
   end
 end

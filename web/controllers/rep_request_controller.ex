@@ -39,14 +39,15 @@ defmodule CongressNinja.RepRequestController do
   end
 
   def update(conn, %{ "id" => id, "rep_request" => rep_request_params }) do
-    case Repo.update(RepRequest.changeset(Repo.get(RepRequest, id), rep_request_params)) do
-      {:ok, rep_request} ->
+    rep_request = Repo.get(RepRequest,id)
+    case Repo.update(RepRequest.changeset(rep_request, rep_request_params)) do
+      {:ok, _} ->
         conn
         |> redirect(to: "/#{rep_request.slug}")
       {:error, changeset} ->
         conn
-        |> put_flash(:info, changeset.errors)
-        |> render(:index, errors: changeset.errors)
+        |> put_flash(:info, "Sorry we couldn't find a rep for that address. Try again?")
+        |> render(:show, changeset: changeset, rep_request: rep_request |> Repo.preload(:reps))
     end
   end
 
