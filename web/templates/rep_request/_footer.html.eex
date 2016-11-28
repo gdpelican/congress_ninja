@@ -20,4 +20,7 @@
     <span class="copyright-symbol"> © </span>
     <span><%= DateTime.utc_now |> Map.fetch!(:year) %> James Kiesel</span>
   </div>
+  <div class="photo-credit">
+    <a href="http://imgur.com/a/wVm0E">Photo credit</a>
+  </div>
 </footer>

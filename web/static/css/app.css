@@ -167,6 +167,7 @@ a:hover   { color: #ddd; }
 }
 
 .clear-search {
+  font-size: 20px;
   margin-top: 75px;
 }
 
@@ -229,4 +230,9 @@ footer img.no-radius {
 
 .copyright {
   font-size: 14px;
+}
+
+.photo-credit {
+  line-height: 20px;
+  font-size: 13px;
 }
