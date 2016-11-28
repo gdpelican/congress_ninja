@@ -21,7 +21,7 @@ defmodule CongressNinja.RepRequestController do
         |> redirect(to: "/")
       rep_request ->
         conn
-        |> render :show, changeset: RepRequest.changeset(rep_request, %{}), rep_request: rep_request |> Repo.preload(:reps)
+        |> render(:show, changeset: RepRequest.changeset(rep_request, %{}), rep_request: rep_request |> Repo.preload(:reps))
     end
   end
 
@@ -30,7 +30,7 @@ defmodule CongressNinja.RepRequestController do
       {:ok, rep_request} ->
         conn
         |> set_slug_cookie(rep_request.slug, 31536000) # one year expiration
-        |> redirect to: "/#{rep_request.slug}"
+        |> redirect(to: "/#{rep_request.slug}")
       {:error, changeset} ->
         conn
         |> put_flash(:info, "We couldn't find that zip code! Try again?")
@@ -42,7 +42,7 @@ defmodule CongressNinja.RepRequestController do
     case Repo.update(RepRequest.changeset(Repo.get(RepRequest, id), rep_request_params)) do
       {:ok, rep_request} ->
         conn
-        |> redirect to: "/#{rep_request.slug}"
+        |> redirect(to: "/#{rep_request.slug}")
       {:error, changeset} ->
         conn
         |> put_flash(:info, changeset.errors)
