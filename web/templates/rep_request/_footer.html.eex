@@ -1,0 +1,23 @@
+<footer class="footer">
+  <div class="created-by">
+  <span>Created on the </span>
+    <img src="/images/road.png" />
+    <span> with </span>
+    <img class="no-radius" src="/images/love.png" />
+    <span> by </span>
+    <a href="https://www.github.com/gdpelican" target="_blank">
+      <img src="/images/james.png" />
+    </a>
+  </div>
+  <div class="get-in-touch">
+    <a href="mailto:james@loomio.org"><i class="fa fa-envelope"></i></a>
+    <a href="https://www.facebook.com/james.kiesel" target="_blank"><i class="fa fa-facebook"></i></a>
+    <a href="https://github.com/gdpelican" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="https://twitter.com/gdpelican" target="_blank"><i class="fa fa-twitter"></i></a>
+  </div>
+  <div class="copyright">
+    <span>Copyright</span>
+    <span class="copyright-symbol"> © </span>
+    <span><%= DateTime.utc_now |> Map.fetch!(:year) %> James Kiesel</span>
+  </div>
+</footer>

@@ -8,7 +8,8 @@
     <meta name="author" content="">
 
     <title>ヽ( ^-^)ﾉ -  → 卍 (ﾉ>_<)ﾉ</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
   </head>
 
   <body>
@@ -26,9 +27,9 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
       <div></div>
-      <footer>
-      </footer>
+      <div></div>
     </div>
+    <%= render CongressNinja.RepRequestView, "_footer.html" %>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
