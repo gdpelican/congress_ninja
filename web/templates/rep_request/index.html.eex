@@ -2,6 +2,6 @@
 <h2>Contact them in an instant</h2>
 <form class="highlight-area" action="/rep_requests" method="POST">
   <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>" />
-  <input class="form-input" name="rep_request[zip]" type="number" placeholder="What's your zip code?" />
+  <input class="form-input" name="rep_request[zip]" type="number" placeholder="What's your zip code?" min="1" max="99999" />
   <input class="form-submit button form-button" type="submit" value="GO" />
 </form>
