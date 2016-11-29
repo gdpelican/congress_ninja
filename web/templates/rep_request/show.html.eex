@@ -1,9 +1,9 @@
 <section>
   <%= case Enum.count(@rep_request.reps) do %>
   <% 1 -> %>
-    <div>Your representative is:</div>
+    <div class="rep-announce">Your representative is:</div>
   <% _ -> %>
-    <div>
+    <div class="rep-announce">
       <span>Looks like there is more than one possible rep for your zip code. </span>
       <a class="why-is-that" href="http://sunlightfoundation.com/2012/01/19/dont-use-zipcodes/", target="_blank">Why is that?</a>
     </div>

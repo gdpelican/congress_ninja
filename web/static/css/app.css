@@ -1,25 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
 
-/* This file is for your main application css. */
-body {
-  font-family: "Ubuntu Condensed", sans-serif;
-  text-align: center;
-  margin: 0;
+* { box-sizing: border-box; }
+
+html {
   background: url('/images/houseofreps.jpg');
   background-size: cover;
   background-position: center center;
 }
 
-@media (max-width: 500px) {
-  body { background-image: url('/images/houseofreps.jpg'); }
+body {
+  min-height: 100vh;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  font-family: "Ubuntu Condensed", sans-serif;
+  text-align: center;
+  margin: 0;
 }
 
-@media (max-width: 786px) {
-  body { background-image: url('/images/houseofreps.jpg'); }
+@media (min-width: 640px) {
+  main { padding: 20px; }
 }
 
-@media (min-width: 786px) {
-  body { background-image: url('/images/houseofreps.jpg'); }
+@media (max-width: 640px) {
+  main { padding: 10px; }
+  .rep-announce { font-size: 18px; }
+  .slug-url { font-size: 20px !important; }
+  .form-input { font-size: 25px !important; }
 }
 
 header .alert {
@@ -45,7 +55,7 @@ h2 {
 }
 
 main {
-  padding: 20px;
+  max-width: 100%;
   margin: auto;
   background: rgba(0,0,0,0.65);
   color: white;
@@ -61,7 +71,6 @@ a:hover   { color: #ddd; }
 
 .container {
   padding: 10px;
-  min-height: 100vh;
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
@@ -73,6 +82,7 @@ a:hover   { color: #ddd; }
 .alert { margin: 0; }
 
 .highlight-area {
+  max-width: 100%;
   display: inline-block;
   background: rgba(255,255,255,0.2);
   padding: 15px;
@@ -145,6 +155,7 @@ a:hover   { color: #ddd; }
 }
 
 .form-input {
+  max-width: 100%;
   width: 335px;
   text-align: center;
   font-size: 32px;
