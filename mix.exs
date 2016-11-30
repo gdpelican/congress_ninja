@@ -42,6 +42,7 @@ defmodule CongressNinja.Mixfile do
      {:httpotion, "~> 3.0.2"},
      {:edeliver, "~> 1.4.0"},
      {:distillery, ">= 0.8.0", warn_missing: false},
+     {:exrm, "~> 1.0.8"},
      {:mock, "~> 0.2.0", only: :test}]
   end
 
