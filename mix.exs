@@ -4,7 +4,7 @@ defmodule CongressNinja.Mixfile do
   def project do
     [app: :congress_ninja,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule CongressNinja.Mixfile do
   def application do
     [mod: {CongressNinja, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion]]
+                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion, :edeliver]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,6 +40,8 @@ defmodule CongressNinja.Mixfile do
      {:cowboy, "~> 1.0"},
      {:ex_machina, "~> 1.0"},
      {:httpotion, "~> 3.0.2"},
+     {:edeliver, "~> 1.4.0"},
+     {:distillery, ">= 0.8.0", warn_missing: false},
      {:mock, "~> 0.2.0", only: :test}]
   end
 

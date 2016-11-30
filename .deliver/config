@@ -1,0 +1,9 @@
+APP="congress-ninja"
+
+BUILD_HOST="138.197.32.128"
+BUILD_USER="root"
+BUILD_AT="/var/www/congress_ninja/current"
+
+STAGING_HOSTS="stage.myapp.com"
+STAGING_USER="web"
+DELIVER_TO="/home/web"
