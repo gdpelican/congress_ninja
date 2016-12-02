@@ -26,9 +26,6 @@ config :congress_ninja, CongressNinja.Endpoint,
     ]
   ]
 
-config :congress_ninja, CongressNinja.GeocodioService,
-  geocodio_api_key: "8303b8803f5333f3805518e355e35e85383f38f"
-
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
