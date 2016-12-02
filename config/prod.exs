@@ -10,7 +10,6 @@ config :congress_ninja, CongressNinja.Endpoint,
 # Configure your database
 config :congress_ninja, CongressNinja.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "congress_ninja_prod",
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "20"),
   ssl: true
