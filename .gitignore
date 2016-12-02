@@ -8,4 +8,3 @@
 /priv/static/
 /config/prod.secret.exs
 .DS_STORE
-.deliver/releases/
