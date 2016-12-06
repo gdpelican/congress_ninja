@@ -4,8 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="title" content="Say hello to Congress Ninja">
+    <meta name="description" content="Contact your rep in an instant">
     <meta name="author" content="">
+
+    <meta property="og:title" content="Say hello to Congress Ninja" />
+    <meta property="og:description" content="Contact your rep in an instant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://congress.ninja" />
+    <meta property="og:image" content="https://www.congress.ninja/images/houseofreps-small-1b0b29a1bbc524deb8a3ed02b8456847.jpg" />
 
     <title>ヽ( ^-^)ﾉ    → 卍 (ﾉ>_<)ﾉ</title>
     <link rel="icon" type="image/ico" href="images/favicon.ico"></link>
