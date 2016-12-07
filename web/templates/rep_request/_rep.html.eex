@@ -2,7 +2,11 @@
   <section>
     <img class="rep-image" src="<%= @rep.avatar %>" alt="<%= @rep.name %>" />
     <h1 class="rep-name"><%= @rep.name %></h2>
-    <h2 class="rep-title"><%= @rep.state_name %> - District <%= @rep.district %></h3>
+    <%= if @rep.district == Decimal.new(0) do %>
+      <h2 class="rep-title"><%= @rep.state_name %> At large</h2>
+    <%= else %>
+      <h2 class="rep-title"><%= @rep.state_name %> - District <%= @rep.district %></h2>
+    <% end %>
     <a class="button rep-button" href="tel:+1-<%= @rep.phone %>" /><%= @rep.phone %></a>
   </section>
 </li>
